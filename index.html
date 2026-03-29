@@ -160,16 +160,18 @@
         .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
         .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
         .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
-        。card-title { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-background); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;}
-        。card。primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
+        .card-title { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-background); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;}
+        .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
 
         .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); }
+        /* 统一的 chip 基础样式 */
+        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: all 0.2s ease;}
+        .chip:hover { transform: scale(1.05); }
+        /* 特定颜色的 chip 样式 */
         .chip.primary { background-color: rgba(184, 209, 255, 0.8); color: var(--md-on-primary); }
         .chip.tertiary { background-color: rgba(166, 220, 232, 0.8); color: #00363D; }
         .chip.accent { background-color: rgba(242, 184, 208, 0.8); color: #4A1128; }
-        .chip.success { background-color: rgba(150, 220, 150, 0.8); color: #003800; }
-        .chip.learning { background-color: rgba(240, 200, 140, 0.8); color: #3B2400; }
+        
         ul { margin: 0; padding-left: 1.5rem; line-height: 1.8; color: var(--md-on-surface-variant); font-size: clamp(0.95rem, 3vw, 1rem); }
         .card.primary ul, .card.tertiary ul, .card.accent ul { color: rgba(255, 255, 255, 0.9); }
         strong { color: var(--md-on-background); font-weight: 600; }
@@ -298,11 +300,11 @@
                 <div class="card-title">编程与开发</div>
                 <p style="margin: 0 0 10px 0; color: var(--md-on-surface-variant);">全栈开发学习，聚焦底层能力</p>
                 <div class="chip-container">
-                    <span class="chip success">Rust 语言</span>
-                    <span class="chip success">C 语言底层</span>
-                    <span class="chip learning">Flutter 应用开发</span>
-                    <span class="chip success">Git 版本控制</span>
-                    <span class="chip success">油猴脚本开发</span>
+                    <span class="chip">Rust 语言</span>
+                    <span class="chip">C 语言底层</span>
+                    <span class="chip">Flutter 应用开发</span>
+                    <span class="chip">Git 版本控制</span>
+                    <span class="chip">油猴脚本开发</span>
                 </div>
             </div>
             <div class="card tertiary animate delay-3">
