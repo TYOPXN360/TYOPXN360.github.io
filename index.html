@@ -62,10 +62,10 @@
             opacity: 0.85;
             animation: blob-move 25s infinite alternate ease-in-out;
         }
-        。blob-1 { width: 65vw; height: 65vw; background: linear-gradient(135deg, var(--blur-blob-1), var(--blur-blob-4)); top: -15%; left: -10%; animation-duration: 28s; }
-        。blob-2 { width: 55vw; height: 55vw; background: linear-gradient(135deg, var(--blur-blob-2), var(--blur-blob-1)); bottom: -10%; right: -5%; animation-duration: 32s; animation-delay: -6s; }
-        。blob-3 { width: 45vw; height: 45vw; background: linear-gradient(135deg, var(--blur-blob-3), var(--blur-blob-2)); top: 35%; left: 25%; animation-duration: 22s; animation-delay: -12s; }
-        。blob-4 { width: 40vw; height: 40vw; background: linear-gradient(135deg, var(--blur-blob-4), var(--blur-blob-3)); bottom: 20%; left: -10%; animation-duration: 26s; animation-delay: -8s; }
+        .blob-1 { width: 65vw; height: 65vw; background: linear-gradient(135deg, var(--blur-blob-1), var(--blur-blob-4)); top: -15%; left: -10%; animation-duration: 28s; }
+        .blob-2 { width: 55vw; height: 55vw; background: linear-gradient(135deg, var(--blur-blob-2), var(--blur-blob-1)); bottom: -10%; right: -5%; animation-duration: 32s; animation-delay: -6s; }
+        .blob-3 { width: 45vw; height: 45vw; background: linear-gradient(135deg, var(--blur-blob-3), var(--blur-blob-2)); top: 35%; left: 25%; animation-duration: 22s; animation-delay: -12s; }
+        .blob-4 { width: 40vw; height: 40vw; background: linear-gradient(135deg, var(--blur-blob-4), var(--blur-blob-3)); bottom: 20%; left: -10%; animation-duration: 26s; animation-delay: -8s; }
         @keyframes blob-move {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
             50% { transform: translate(10vw, -10vh) scale(1.15) rotate(90deg); }
@@ -73,7 +73,7 @@
         }
 
         /* 音乐按钮强化版 */
-        。fab-music {
+        .fab-music {
             position: fixed; 
             top: 20px; right: 20px;
             width: 56px; height: 56px; 
@@ -92,20 +92,20 @@
             -webkit-backdrop-filter: blur(20px);
         }
         @media (min-width: 768px) {
-            。fab-music {
+            .fab-music {
                 top: 30px; right: 30px;
                 width: 68px; height: 68px; /* PC端更大 */
             }
         }
-        。fab-music:active { transform: scale(0.92); background-color: rgba(20, 40, 80, 1); }
-        。breathing { animation: breathe 2s infinite ease-in-out; }
+        .fab-music:active { transform: scale(0.92); background-color: rgba(20, 40, 80, 1); }
+        .breathing { animation: breathe 2s infinite ease-in-out; }
         @keyframes breathe {
             0% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
             50% { box-shadow: 0 8px 24px rgba(184, 209, 255, 0.5); transform: scale(1.08); }
             100% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
         }
 
-        。ppt-container {
+        .ppt-container {
             position: relative;
             z-index: 10;
             height: 100vh; height: 100dvh;
