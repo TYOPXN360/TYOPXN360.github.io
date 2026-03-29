@@ -473,39 +473,56 @@
 
             <div class="ending-right">
                 <h2 class="animate" style="font-size: 1.5rem; margin-bottom: 1.5rem;">鸣谢名单 (Credits)</h2>
-                <div class="credits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; align-items: stretch;">
+                
+                <style>
+                    .name-tag {
+                        display: inline-block;
+                        padding: 2px 8px;
+                        border-radius: 6px;
+                        font-weight: 600;
+                        margin-right: 4px;
+                        font-size: 0.9rem;
+                        white-space: nowrap;
+                    }
+                    /* 适配不同卡片的背景框颜色 */
+                    .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
+                    .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
+                    .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
+                    .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
+                </style>
+
+                <div class="credits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; align-items: stretch;">
                     
-                    <div class="card animate delay-1 credit-card" style="display: flex; flex-direction: column; height: 100%;">
-                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 4px;">启蒙 · 小学</div>
-                        <div style="font-size: 0.9rem; line-height: 1.6;">
-                            <strong style="color: var(--md-primary); display: block; margin-bottom: 4px;">ORC & YTT</strong>
-                            <span style="opacity: 0.9;">Minecraft路上的古神级启蒙伙伴</span>
+                    <div class="card animate delay-1" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">启蒙 · 小学</div>
+                        <div style="font-size: 0.9rem; line-height: 1.7;">
+                            <p><span class="name-tag">ORC & YTT</span> Minecraft路上的古神级启蒙伙伴</p>
                         </div>
                     </div>
                     
-                    <div class="card tertiary animate delay-2 credit-card" style="display: flex; flex-direction: column; height: 100%;">
-                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 4px;">折腾 · 初中</div>
-                        <div style="font-size: 0.85rem; line-height: 1.6;">
-                            <p style="margin-bottom: 8px;"><strong style="color: var(--md-tertiary);">YRH：</strong>陪伴最久的朋友，玩机路上不离不弃，至今仍在联系</p>
-                            <p><strong>WXH：</strong>MC PVP 技术大牛，幽默的玩家</p>
+                    <div class="card tertiary animate delay-2" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">折腾 · 初中</div>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 8px;"><span class="name-tag">YRH</span> 陪伴最久的朋友，玩机路上不离不弃，至今仍在联系</p>
+                            <p><span class="name-tag">WXH</span> Minecraft的PVP技术大牛，幽默的玩家</p>
                         </div>
                     </div>
                     
-                    <div class="card primary animate delay-3 credit-card" style="display: flex; flex-direction: column; height: 100%;">
-                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 4px;">并肩 · 高中</div>
-                        <div style="font-size: 0.85rem; line-height: 1.5;">
-                            <p style="margin-bottom: 4px;"><strong style="color: var(--md-primary-container); background: var(--md-primary); padding: 0 4px; border-radius: 4px;">WTY</strong> 远超我的跑友/音游专业玩家</p>
-                            <p style="margin-bottom: 4px;"><strong>WJY：</strong>MC启蒙玩家，沉稳陪跑的Runner</p>
-                            <p><strong>TYH：</strong>体育巨佬，玩机路上的小伙伴</p>
+                    <div class="card primary animate delay-3" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">并肩 · 高中</div>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 6px;"><span class="name-tag">WTY</span> 实力远超我的跑友 / 音游专业玩家</p>
+                            <p style="margin-bottom: 6px;"><span class="name-tag">WJY</span> Minecraft启蒙玩家，沉稳陪跑的Runner</p>
+                            <p><span class="name-tag">TYH</span> 体育巨佬，无人能及；玩机路上的小伙伴</p>
                         </div>
                     </div>
                     
-                    <div class="card accent animate delay-4 credit-card" style="display: flex; flex-direction: column; height: 100%;">
-                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 4px;">探索 · 大学</div>
-                        <div style="font-size: 0.85rem; line-height: 1.6;">
-                            <p style="margin-bottom: 4px;"><strong>SZX：</strong>网金时期跑步伙伴，马拉松领跑者</p>
-                            <p style="margin-bottom: 4px;"><strong>HFK：</strong>网金时期MC腐竹大牛，资源丰富</p>
-                            <p><strong>ZGH：</strong>现实引路人，走遍国贸每个角落</p>
+                    <div class="card accent animate delay-4" style="display: flex; flex-direction: column; height: 100%;">
+                        <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">探索 · 大学</div>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 6px;"><span class="name-tag">SZX</span> 网金时期跑步伙伴，马拉松领跑者</p>
+                            <p style="margin-bottom: 6px;"><span class="name-tag">HFK</span> 网金时期Minecraft腐竹大牛，资源丰富</p>
+                            <p><span class="name-tag">ZGH</span> 现实引路人，陪我走遍国贸每个角落</p>
                         </div>
                     </div>
 
