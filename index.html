@@ -161,8 +161,12 @@
         .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
         .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
         .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
+        
+        /* 🍑 Peach 色卡片定义 */
+        .card.peach { background-color: rgba(255, 218, 212, 0.25); color: #FFDAD4; border-color: rgba(255, 218, 212, 0.4); }
+
         .card-title { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-background); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;}
-        .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
+        .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title, .card.peach .card-title { color: inherit; }
 
         .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
         .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: transform 0.2s ease;}
@@ -172,9 +176,9 @@
         .chip.accent { background-color: rgba(242, 184, 208, 0.8); color: #4A1128; }
         
         ul { margin: 0; padding-left: 1.5rem; line-height: 1.8; color: var(--md-on-surface-variant); font-size: clamp(0.95rem, 3vw, 1rem); }
-        .card.primary ul, .card.tertiary ul, .card.accent ul { color: rgba(255, 255, 255, 0.9); }
+        .card.primary ul, .card.tertiary ul, .card.accent ul, .card.peach ul { color: rgba(255, 255, 255, 0.9); }
         strong { color: var(--md-on-background); font-weight: 600; }
-        .card.primary strong, .card.tertiary strong, .card.accent strong { color: #FFFFFF; }
+        .card.primary strong, .card.tertiary strong, .card.accent strong, .card.peach strong { color: #FFFFFF; }
 
         .progress-wrap { margin-top: 12px; }
         .progress-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 6px; color: var(--md-on-surface-variant); }
@@ -182,7 +186,7 @@
         .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary)); border-radius: 4px; transition: width 1.2s cubic-bezier(0.15, 0.6, 0.1, 1); }
         .slide.active .progress-fill { width: var(--progress); }
 
-        /* 最后一页对齐样式修复 */
+        /* 最后一页双栏布局 */
         .split-ending {
             display: flex;
             flex-direction: column;
@@ -192,6 +196,7 @@
             align-items: center;
         }
 
+        /* 鸣谢名单手机端对齐修复 */
         .credit-row {
             display: flex;
             align-items: flex-start;
@@ -207,14 +212,15 @@
             font-weight: 600;
             font-size: 0.85rem;
             white-space: nowrap;
-            flex-shrink: 0; /* 核心修复：防止手机端标签被挤压 */
+            flex-shrink: 0;
         }
 
-        /* 适配不同卡片的背景框颜色 */
+        /* 适配名字标签颜色 */
         .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
         .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
         .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
         .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
+        .card.peach .name-tag { background: rgba(255, 218, 212, 0.3); color: #FFDAD4; }
 
         @media (min-width: 1024px) {
             .split-ending {
@@ -224,12 +230,13 @@
                 justify-content: space-between;
             }
             .ending-left { flex: 1; padding-top: 4rem; }
-            .ending-right { flex: 1.2; }
+            .ending-right { flex: 1.3; }
             .credits-grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.2rem;
             }
+            #ending { text-align: left; }
             #ending .chip-container { justify-content: flex-start; }
         }
     </style>
@@ -318,6 +325,7 @@
             <div class="card animate delay-2">
                 <div class="card-title">社交边界与关系</div>
                 <ul>
+                    <li><strong>核心密友：</strong>zgh（大学校园第一学期挚友）</li>
                     <li><strong>社交原则：</strong>强边界感，主动回避低质量无效社交</li>
                     <li><strong>社交状态：</strong>对陌生环境有轻微社交焦虑，偏爱小范围深度社交</li>
                     <li><strong>相处模式：</strong>真诚坦率，重视彼此的尊重与情绪价值</li>
@@ -389,7 +397,7 @@
                     <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi K30 Pro (lmi)</span>
                 </div>
             </div>
-            <div class="card animate delay-3">
+            <div class="card peach animate delay-3">
                 <div class="card-title">Minecraft 开发者生态</div>
                 <ul>
                     <li><strong>服务端能力：</strong>MC服务端搭建、联机技术调试、IPv6远程联机配置</li>
