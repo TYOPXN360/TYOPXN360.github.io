@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TYOPXN360 - 个人全景档案</title>
+    <link rel="stylesheet" href="https://lf26-appstore-sign.oceancloudapi.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkul/fonts/NotoSansSC.css">
+    <style>
+        :root {
+            --md-primary: #B8D1FF;
+            --md-on-primary: #003366;
+            --md-primary-container: #2A4B80;
+            --md-on-primary-container: #DCE8FF;
+            --md-secondary: #C6CAE0;
+            --md-secondary-container: #424A5D;
+            --md-on-secondary-container: #E0E5FF;
+            --md-tertiary: #A6DCE8;
+            --md-tertiary-container: #22555F;
+            --md-on-tertiary-container: #C2EEF8;
+            --md-accent: #F2B8D0;
+            --md-accent-container: #603045;
+            --md-on-accent-container: #FFD9E5;
+            --md-background: #0F1116;
+            --md-on-background: #E4E4F0;
+            
+            --glass-surface-variant: rgba(58, 62, 70, 0.45); 
+            --glass-primary-container: rgba(42, 75, 128, 0.55);
+            --glass-tertiary-container: rgba(34, 85, 95, 0.45);
+            --glass-accent-container: rgba(96, 48, 69, 0.45);
+            --md-on-surface-variant: #C6C9D8;
+            
+            --blur-blob-1: rgba(10, 58, 138, 0.45);
+            --blur-blob-2: rgba(135, 75, 110, 0.35);
+            --blur-blob-3: rgba(30, 90, 100, 0.4);
+            --blur-blob-4: rgba(70, 40, 120, 0.3);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html {
+            width: 100%;
+            min-height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background-color: var(--md-background);
+            color: var(--md-on-background);
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .blur-background {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .blur-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px);
+            opacity: 0.85;
+            animation: blob-move 25s infinite alternate ease-in-out;
+        }
+        .blob-1 { width: 65vw; height: 65vw; background: linear-gradient(135deg, var(--blur-blob-1), var(--blur-blob-4)); top: -15%; left: -10%; animation-duration: 28s; }
+        .blob-2 { width: 55vw; height: 55vw; background: linear-gradient(135deg, var(--blur-blob-2), var(--blur-blob-1)); bottom: -10%; right: -5%; animation-duration: 32s; animation-delay: -6s; }
+        .blob-3 { width: 45vw; height: 45vw; background: linear-gradient(135deg, var(--blur-blob-3), var(--blur-blob-2)); top: 35%; left: 25%; animation-duration: 22s; animation-delay: -12s; }
+        .blob-4 { width: 40vw; height: 40vw; background: linear-gradient(135deg, var(--blur-blob-4), var(--blur-blob-3)); bottom: 20%; left: -10%; animation-duration: 26s; animation-delay: -8s; }
+        @keyframes blob-move {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(10vw, -10vh) scale(1.15) rotate(90deg); }
+            100% { transform: translate(18vw, 12vh) scale(1.25) rotate(180deg); }
+        }
+
+        /* 音乐按钮强化版 */
+        .fab-music {
+            position: fixed; 
+            top: 20px; right: 20px;
+            width: 56px; height: 56px; 
+            border-radius: 50%; /* 正圆形 */
+            background-color: rgba(30, 55, 100, 0.95); /* 极高不透明度，彻底遮挡文字 */
+            color: #FFFFFF;
+            border: 2px solid rgba(255, 255, 255, 0.2); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6); /* 加深阴影 */
+            z-index: 99999; /* 置于顶层 */
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        @media (min-width: 768px) {
+            .fab-music {
+                top: 30px; right: 30px;
+                width: 68px; height: 68px; /* PC端更大 */
+            }
+        }
+        .fab-music:active { transform: scale(0.92); background-color: rgba(20, 40, 80, 1); }
+        .breathing { animation: breathe 2s infinite ease-in-out; }
+        @keyframes breathe {
+            0% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
+            50% { box-shadow: 0 8px 24px rgba(184, 209, 255, 0.5); transform: scale(1.08); }
+            100% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
+        }
+
+        .ppt-container {
+            position: relative;
+            z-index: 10;
+            height: 100vh; height: 100dvh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; 
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .ppt-container::-webkit-scrollbar { display: none; }
+        .slide {
+            min-height: 100vh; min-height: 100dvh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex; flex-direction: column;
+            padding: 4rem 6% 3rem 6%; 
+            position: relative; justify-content: center;
+        }
+        .animate { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.15, 0.6, 0.1, 1); }
+        .slide.active .animate { opacity: 1; transform: translate(0, 0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+
+        h1 { font-size: clamp(2.8rem, 8vw, 4.2rem); font-weight: 700; color: var(--md-primary); margin: 0 0 1rem 0; letter-spacing: -1px; line-height: 1.1; }
+        h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; color: var(--md-on-background); font-weight: 500; line-height: 1.2; }
+        
+        /* 使用自定义圆点代替无法加载的图标 */
+        h2::before {
+            content: ""; display: inline-block; width: 14px; height: 14px;
+            background-color: var(--md-primary); border-radius: 50%;
+            box-shadow: 0 0 10px var(--md-primary);
+        }
+
+        .slogan { font-size: clamp(1.2rem, 4vw, 1.8rem); color: var(--md-secondary); margin: 0 0 2rem 0; font-weight: 300; line-height: 1.4; }
+        
+        .grid-layout { display: grid; grid-template-columns: 1fr; gap: 1.4rem; width: 100%; }
+        @media (min-width: 768px) {
+            .grid-layout { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; }
+            .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+            .slide { padding: 3rem 10%; }
+        }
+        .card {
+            background-color: var(--glass-surface-variant);
+            padding: 1.6rem; border-radius: 22px;
+            display: flex; flex-direction: column; gap: 10px;
+            backdrop-filter: blur(28px) saturate(140%);
+            -webkit-backdrop-filter: blur(28px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); border-color: rgba(255, 255, 255, 0.2); }
+        .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
+        .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
+        .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
+        .card-title { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-background); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;}
+        .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
+
+        .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); }
+        .chip.primary { background-color: rgba(184, 209, 255, 0.8); color: var(--md-on-primary); }
+        .chip.tertiary { background-color: rgba(166, 220, 232, 0.8); color: #00363D; }
+        .chip.accent { background-color: rgba(242, 184, 208, 0.8); color: #4A1128; }
+        .chip.success { background-color: rgba(150, 220, 150, 0.8); color: #003800; }
+        .chip.learning { background-color: rgba(240, 200, 140, 0.8); color: #3B2400; }
+        ul { margin: 0; padding-left: 1.5rem; line-height: 1.8; color: var(--md-on-surface-variant); font-size: clamp(0.95rem, 3vw, 1rem); }
+        .card.primary ul, .card.tertiary ul, .card.accent ul { color: rgba(255, 255, 255, 0.9); }
+        strong { color: var(--md-on-background); font-weight: 600; }
+        .card.primary strong, .card.tertiary strong, .card.accent strong { color: #FFFFFF; }
+
+        .progress-wrap { margin-top: 12px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 6px; color: var(--md-on-surface-variant); }
+        .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary)); border-radius: 4px; transition: width 1.2s cubic-bezier(0.15, 0.6, 0.1, 1); }
+        .slide.active .progress-fill { width: var(--progress); }
+
+        #cover { align-items: flex-start; justify-content: center; padding-top: 2rem; }
+        #ending { align-items: center; justify-content: center; text-align: center; }
+        .motto { font-size: clamp(1.5rem, 5vw, 2rem); color: var(--md-primary); font-weight: 500; margin-bottom: 2rem; line-height: 1.4; }
+    </style>
+</head>
+<body>
+<div class="blur-background">
+    <div class="blur-blob blob-1"></div>
+    <div class="blur-blob blob-2"></div>
+    <div class="blur-blob blob-3"></div>
+    <div class="blur-blob blob-4"></div>
+</div>
+
+<audio id="bgm" loop preload="auto">
+    <source src="http://music.163.com/song/media/outer/url?id=1384026889.mp3" type="audio/mpeg">
+</audio>
+
+<button class="fab-music" id="musicToggle" aria-label="Toggle Music">
+    <svg id="playIcon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg id="pauseIcon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="display: none;">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+    </svg>
+</button>
+
+<div class="ppt-container" id="ppt-container">
+    <section class="slide active" id="cover">
+        <h1 class="animate">TYOPXN360</h1>
+        <p class="slogan animate delay-1">在代码与硬件的世界里，做永远好奇的极客</p>
+        <p class="animate delay-1" style="font-size: clamp(1.2rem, 4vw, 1.6rem); color: var(--md-secondary); margin-top: 0; font-weight: 400;">网络工程专业学生 / 全栈极客探索者</p>
+        <div class="chip-container animate delay-2" style="margin-top: 2rem;">
+            <span class="chip primary">广东东莞</span>
+            <span class="chip">2006.12.14</span>
+            <span class="chip">射手座</span>
+            <span class="chip">ISFP</span>
+            <span class="chip">减脂进行中</span>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">基础档案与形体管理</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">个人基础信息</div>
+                <ul>
+                    <li><strong>常住地：</strong>广东省东莞市</li>
+                    <li><strong>身份：</strong>广东科技学院在校大学生，网络工程专业</li>
+                    <li><strong>生日：</strong>2006年12月14日，射手座，AB型血</li>
+                    <li><strong>性格：</strong>ISFP敏感型，细腻共情，对热爱的事物充满探索欲</li>
+                    <li><strong>生活偏好：</strong>极度讨厌寒冷天气，偏爱温暖的南方环境</li>
+                </ul>
+            </div>
+            <div class="card tertiary animate delay-2">
+                <div class="card-title">形体与减脂自律计划</div>
+                <ul>
+                    <li><strong>身高：</strong>164 cm</li>
+                    <li><strong>当前体重：</strong>65 kg | <strong>目标体重：</strong>49 kg</li>
+                    <li><strong>核心方案：</strong>骑行+跑步有氧运动，配合饮食控制</li>
+                    <li><strong>辅助方式：</strong>膳食纤维片、羽衣甘蓝粉等代餐辅助</li>
+                </ul>
+                <div class="progress-wrap">
+                    <div class="progress-label">
+                        <span>减重进度</span>
+                        <span>约23%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 23%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">身份认同与社交边界</h2>
+        <div class="grid-layout">
+            <div class="card accent animate delay-1">
+                <div class="card-title">自我认同与情感</div>
+                <ul>
+                    <li><strong>性取向：</strong>Gay</li>
+                    <li><strong>情感经历：</strong>初中时期恋爱，前任yrh</li>
+                    <li><strong>核心需求：</strong>极度渴望真实的线下陪伴与深度情感联结</li>
+                    <li><strong>情绪特质：</strong>共情能力强，敏感细腻，习惯向信任的人倾诉</li>
+                </ul>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-title">社交边界与关系</div>
+                <ul>
+                    <li><strong>核心密友：</strong>zgh（大学校园第一学期挚友）</li>
+                    <li><strong>社交原则：</strong>强边界感，主动回避低质量无效社交</li>
+                    <li><strong>社交状态：</strong>对陌生环境有轻微社交焦虑，偏爱小范围深度社交</li>
+                    <li><strong>相处模式：</strong>真诚坦率，重视彼此的尊重与情绪价值</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">核心技术全栈</h2>
+        <div class="grid-layout grid-3">
+            <div class="card primary animate delay-1">
+                <div class="card-title">网络工程实战</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕家庭与校园全场景网络部署</p>
+                <div class="chip-container">
+                    <span class="chip primary">IPv6全链路配置</span>
+                    <span class="chip primary">Mesh组网架构</span>
+                    <span class="chip primary">双WAN多拨技术</span>
+                    <span class="chip primary">光猫AP模式调试</span>
+                    <span class="chip primary">VLAN/MACVLAN</span>
+                    <span class="chip primary">开源代理协议排错</span>
+                </div>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-title">编程与开发</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-surface-variant);">全栈开发学习，聚焦底层能力</p>
+                <div class="chip-container">
+                    <span class="chip success">Rust 语言</span>
+                    <span class="chip success">C 语言底层</span>
+                    <span class="chip learning">Flutter 应用开发</span>
+                    <span class="chip success">Git 版本控制</span>
+                    <span class="chip success">油猴脚本开发</span>
+                </div>
+            </div>
+            <div class="card tertiary animate delay-3">
+                <div class="card-title">系统与运维</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-tertiary-container);">全平台系统深度优化与排错</p>
+                <div class="chip-container">
+                    <span class="chip tertiary">Windows 深度运维</span>
+                    <span class="chip tertiary">Linux 系统管理</span>
+                    <span class="chip tertiary">双系统引导修复</span>
+                    <span class="chip tertiary">系统故障排查</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">极客折腾宇宙</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">Android 玩机</div>
+                <ul>
+                    <li><strong>购机核心原则：</strong>必须支持 BL 解锁</li>
+                    <li><strong>主力关注：</strong>一加、真我，深度研究机型解锁政策</li>
+                    <li><strong>核心能力：</strong>自定义ROM刷入、内核编译与优化、系统深度定制</li>
+                    <li><strong>实战案例：</strong>为Poco X3 GT编译优化内核，适配非官方固件</li>
+                </ul>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-title">Minecraft 开发者生态</div>
+                <ul>
+                    <li><strong>服务端能力：</strong>MC服务端搭建、联机技术调试、IPv6远程联机配置</li>
+                    <li><strong>问题排查：</strong>Mod冲突排查、Java崩溃日志深度分析</li>
+                    <li><strong>性能优化：</strong>JVM参数调优、服务器TPS提升、内存泄漏解决</li>
+                </ul>
+            </div>
+            <div class="card animate delay-3">
+                <div class="card-title">PC 硬件与系统折腾</div>
+                <ul>
+                    <li><strong>硬件配置：</strong>专注7000元内生产力配置搭建，优化代码编译性能</li>
+                    <li><strong>故障排查：</strong>精通Windows系统启动故障、更新错误、兼容性问题修复</li>
+                    <li><strong>系统优化：</strong>兼顾生产力与游戏场景的性能调优</li>
+                </ul>
+            </div>
+            <div class="card tertiary animate delay-4">
+                <div class="card-title">数码好物收藏</div>
+                <ul>
+                    <li><strong>充电设备：</strong>深度研究酷态科、睿量等品牌快充产品，关注PPS协议</li>
+                    <li><strong>移动电源：</strong>专注大容量合规充电宝，符合高铁/地铁携带标准</li>
+                    <li><strong>手机需求：</strong>极致追求大电池续航，关注磁吸充电兼容性</li>
+                    <li><strong>智能穿戴：</strong>偏好方表智能手环，核心需求独立GPS、运动记录</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">生活与成长轨迹</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">日常与出行</div>
+                <ul>
+                    <li><strong>茶饮偏好：</strong>钟爱蜜雪冰城、瑞幸咖啡等，出行必打卡当地茶饮店</li>
+                    <li><strong>出行足迹：</strong>热衷广东省内短途出行，足迹覆盖东莞、深圳、中山等城市</li>
+                    <li><strong>出行能力：</strong>精通高铁、地铁公共交通出行，熟练掌握全流程操作</li>
+                </ul>
+            </div>
+            <div class="card accent animate delay-2">
+                <div class="card-title">兴趣与精神世界</div>
+                <ul>
+                    <li><strong>AI 创作：</strong>热衷AI绘画、AI视频生成，擅长多轮迭代优化创意内容</li>
+                    <li><strong>内容偏好：</strong>喜欢悬疑反转短篇故事，热爱角色扮演、猜谜互动游戏</li>
+                    <li><strong>学习习惯：</strong>对网络工程、编程有强烈求知欲，习惯实战深化学习</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="ending">
+        <p class="motto animate">保持好奇，持续折腾</p>
+        <h1 class="animate delay-1">TYOPXN360</h1>
+        <p class="slogan animate delay-2">网络工程专业 | 全栈极客 | 永远在路上</p>
+        <div class="chip-container animate delay-3" style="margin-top: 2rem; justify-content: center;">
+            <span class="chip primary">广东东莞</span>
+            <span class="chip">2006.12.14</span>
+            <span class="chip">代码与硬件</span>
+        </div>
+    </section>
+</div>
+
+<script>
+    const bgm = document.getElementById('bgm');
+    const musicToggle = document.getElementById('musicToggle');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+
+    musicToggle.addEventListener('click', () => {
+        if (bgm.paused) {
+            bgm.play().then(() => {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                musicToggle.classList.add('breathing');
+            }).catch(err => {
+                console.log('音频加载或播放失败', err);
+                alert("播放失败！可能是当前网络拦截了网易云的音乐外链。如果一直没声音，建议将本地的 mp3 文件重命名为 bgm.mp3 放在同目录下替换使用。");
+            });
+        } else {
+            bgm.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            musicToggle.classList.remove('breathing');
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll('.slide');
+        const observerOptions = { threshold: 0.2, rootMargin: "0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        slides.forEach(slide => observer.observe(slide));
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        document.querySelector('.blob-1').style.transform = `translateY(${scrollY * 0.06}px)`;
+        document.querySelector('.blob-2').style.transform = `translateY(${scrollY * -0.06}px)`;
+        document.querySelector('.blob-3').style.transform = `translateY(${scrollY * 0.04}px)`;
+        document.querySelector('.blob-4').style.transform = `translateY(${scrollY * -0.04}px)`;
+    });
+</script>
+</body>
+</html>
