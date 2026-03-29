@@ -77,16 +77,16 @@
             position: fixed; 
             top: 20px; right: 20px;
             width: 56px; height: 56px; 
-            border-radius: 50%; /* 正圆形 */
-            background-color: rgba(30, 55, 100, 0.95); /* 极高不透明度，彻底遮挡文字 */
+            border-radius: 50%; 
+            background-color: rgba(30, 55, 100, 0.95); 
             color: #FFFFFF;
             border: 2px solid rgba(255, 255, 255, 0.2); 
             display: flex; 
             align-items: center; 
             justify-content: center;
             cursor: pointer; 
-            box-shadow: 0 6px 16px rgba(0,0,0,0.6); /* 加深阴影 */
-            z-index: 99999; /* 置于顶层 */
+            box-shadow: 0 6px 16px rgba(0,0,0,0.6); 
+            z-index: 99999; 
             transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -94,7 +94,7 @@
         @media (min-width: 768px) {
             .fab-music {
                 top: 30px; right: 30px;
-                width: 68px; height: 68px; /* PC端更大 */
+                width: 68px; height: 68px; 
             }
         }
         .fab-music:active { transform: scale(0.92); background-color: rgba(20, 40, 80, 1); }
@@ -124,15 +124,20 @@
             padding: 4rem 6% 3rem 6%; 
             position: relative; justify-content: center;
         }
+        
+        /* 阶梯式弹入动画核心设定 */
         .animate { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.15, 0.6, 0.1, 1); }
         .slide.active .animate { opacity: 1; transform: translate(0, 0); }
-        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+        .delay-1 { transition-delay: 0.1s; } 
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; } 
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
 
         h1 { font-size: clamp(2.8rem, 8vw, 4.2rem); font-weight: 700; color: var(--md-primary); margin: 0 0 1rem 0; letter-spacing: -1px; line-height: 1.1; }
         h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; color: var(--md-on-background); font-weight: 500; line-height: 1.2; }
         
-        /* 使用自定义圆点代替无法加载的图标 */
         h2::before {
             content: ""; display: inline-block; width: 14px; height: 14px;
             background-color: var(--md-primary); border-radius: 50%;
@@ -165,10 +170,8 @@
         .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
 
         .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        /* 统一的 chip 基础样式 */
         .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: all 0.2s ease;}
         .chip:hover { transform: scale(1.05); }
-        /* 特定颜色的 chip 样式 */
         .chip.primary { background-color: rgba(184, 209, 255, 0.8); color: var(--md-on-primary); }
         .chip.tertiary { background-color: rgba(166, 220, 232, 0.8); color: #00363D; }
         .chip.accent { background-color: rgba(242, 184, 208, 0.8); color: #4A1128; }
@@ -324,7 +327,7 @@
     <section class="slide">
         <h2 class="animate">极客折腾宇宙</h2>
         <div class="grid-layout">
-        <div class="card animate delay-1">
+            <div class="card animate delay-1">
                 <div class="card-title">Android 玩机日常</div>
                 <ul>
                     <li><strong>当前主力机：</strong>Google Pixel 9 Pro XL</li>
@@ -340,9 +343,7 @@
                 <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕底层适配，长期为多款机型维护开源 ROM 与内核</p>
                 <div class="chip-container">
                     <span class="chip primary" style="background: rgba(242, 184, 208, 0.25); color: #FFD9E5;">Google Pixel 9 Pro XL (Sultan KSU内核维护编译)</span>
-                    
                     <span class="chip primary" style="background: rgba(255, 255, 255, 0.15);">Redmi Note 10 Pro (chopin)</span>
-                    
                     <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi Note 9 Pro (gauguin)</span>
                     <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi K30S Ultra (apollo)</span>
                     <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi K30 Pro (lmi)</span>
@@ -367,7 +368,7 @@
                 </ul>
             </div>
 
-            <div class="card tertiary animate" style="transition-delay: 0.5s;">
+            <div class="card tertiary animate delay-5">
                 <div class="card-title">数码好物收藏</div>
                 <ul>
                     <li><strong>充电设备：</strong>深度研究酷态科、睿量等品牌快充产品，关注PPS协议</li>
@@ -403,7 +404,7 @@
         </div>
     </section>
 
-<section class="slide">
+    <section class="slide">
         <h2 class="animate">梦想与进阶目标</h2>
         <div class="grid-layout grid-3">
             <div class="card animate delay-1">
