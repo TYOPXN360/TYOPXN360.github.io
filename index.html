@@ -186,29 +186,6 @@
         #ending { align-items: center; justify-content: center; text-align: center; }
         .motto { font-size: clamp(1.5rem, 5vw, 2rem); color: var(--md-primary); font-weight: 500; margin-bottom: 2rem; line-height: 1.4; }
 
-        /* 手机端默认：鸣谢名单单列布局 */
-        .credits-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-            align-items: stretch;
-        }
-
-        /* 名字标签样式 */
-        .name-tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            margin-right: 4px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
-        .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
-        .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
-        .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
-
         /* 最后一页双栏布局 */
         .split-ending {
             display: flex;
@@ -233,7 +210,9 @@
                 flex: 1.2;
             }
             .credits-grid {
+                display: grid;
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
             }
             #ending .chip-container { justify-content: flex-start; }
         }
@@ -247,10 +226,9 @@
     <div class="blur-blob blob-4"></div>
 </div>
 
-<!-- 修复：闭合audio标签 -->
 <audio id="bgm" loop preload="auto">
     <source src="http://music.163.com/song/media/outer/url?id=1384026889.mp3" type="audio/mpeg">
-
+</audio>
 
 <button class="fab-music" id="musicToggle" aria-label="Toggle Music">
     <svg id="playIcon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
@@ -494,7 +472,26 @@
 
             <div class="ending-right">
                 <h2 class="animate" style="font-size: 1.5rem; margin-bottom: 1.5rem;">鸣谢名单 (Credits)</h2>
-                <div class="credits-grid">
+                
+                <style>
+                    .name-tag {
+                        display: inline-block;
+                        padding: 2px 8px;
+                        border-radius: 6px;
+                        font-weight: 600;
+                        margin-right: 4px;
+                        font-size: 0.9rem;
+                        white-space: nowrap;
+                    }
+                    /* 适配不同卡片的背景框颜色 */
+                    .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
+                    .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
+                    .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
+                    .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
+                </style>
+
+                <div class="credits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; align-items: stretch;">
+                    
                     <div class="card animate delay-1" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">启蒙 · 小学</div>
                         <div style="font-size: 0.9rem; line-height: 1.7;">
@@ -527,6 +524,7 @@
                             <p><span class="name-tag">ZGH</span> 网金时期东莞探索者,电动车大神,陪我走遍国贸每个角落</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
