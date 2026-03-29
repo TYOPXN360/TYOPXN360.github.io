@@ -159,8 +159,8 @@
         }
         .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); border-color: rgba(255, 255, 255, 0.2); }
         .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
-        。card。tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
-        。card。accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
+        .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
+        .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
         .card-title { font-size: clamp(1.1rem, 4vw, 1.4rem); font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-background); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;}
         .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
 
@@ -404,14 +404,14 @@
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
 
-    musicToggle。addEventListener('click', () => {
+    musicToggle.addEventListener('click', () => {
         if (bgm.paused) {
             bgm.play().then(() => {
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
                 musicToggle.classList.add('breathing');
             }).catch(err => {
-                console。log('音频加载或播放失败', err);
+                console.log('音频加载或播放失败', err);
                 alert("播放失败！可能是当前网络拦截了网易云的音乐外链。如果一直没声音，建议将本地的 mp3 文件重命名为 bgm.mp3 放在同目录下替换使用。");
             });
         } else {
@@ -437,7 +437,7 @@
 
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        document。querySelector('.blob-1').style.transform = `translateY(${scrollY * 0.06}px)`;
+        document.querySelector('.blob-1').style.transform = `translateY(${scrollY * 0.06}px)`;
         document.querySelector('.blob-2').style.transform = `translateY(${scrollY * -0.06}px)`;
         document.querySelector('.blob-3').style.transform = `translateY(${scrollY * 0.04}px)`;
         document.querySelector('.blob-4').style.transform = `translateY(${scrollY * -0.04}px)`;
