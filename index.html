@@ -186,6 +186,14 @@
         #ending { align-items: center; justify-content: center; text-align: center; }
         .motto { font-size: clamp(1.5rem, 5vw, 2rem); color: var(--md-primary); font-weight: 500; margin-bottom: 2rem; line-height: 1.4; }
 
+        /* 手机端默认：鸣谢名单单列布局 */
+        .credits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            align-items: stretch;
+        }
+
         /* 最后一页双栏布局 */
         .split-ending {
             display: flex;
@@ -210,9 +218,7 @@
                 flex: 1.2;
             }
             .credits-grid {
-                display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1.2rem;
             }
             #ending .chip-container { justify-content: flex-start; }
         }
@@ -228,7 +234,7 @@
 
 <audio id="bgm" loop preload="auto">
     <source src="http://music.163.com/song/media/outer/url?id=1384026889.mp3" type="audio/mpeg">
-</audio>
+
 
 <button class="fab-music" id="musicToggle" aria-label="Toggle Music">
     <svg id="playIcon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
@@ -490,7 +496,7 @@
                     .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
                 </style>
 
-                <div class="credits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; align-items: stretch;">
+                <div class="credits-grid">
                     
                     <div class="card animate delay-1" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">启蒙 · 小学</div>
