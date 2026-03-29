@@ -72,7 +72,6 @@
             100% { transform: translate(18vw, 12vh) scale(1.25) rotate(180deg); }
         }
 
-        /* 音乐按钮强化版 */
         .fab-music {
             position: fixed; 
             top: 20px; right: 20px;
@@ -105,12 +104,13 @@
             100% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
         }
 
-        /* 核心滚动容器：移除了生硬的强制吸附，改为丝滑的原生滚动 */
+        /* 强制吸附滚动 */
         .ppt-container {
             position: relative;
             z-index: 10;
             height: 100vh; height: 100dvh;
             overflow-y: scroll;
+            scroll-snap-type: y mandatory; 
             scroll-behavior: smooth;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
@@ -119,24 +119,29 @@
         .slide {
             min-height: 100vh; min-height: 100dvh;
             width: 100%;
+            scroll-snap-align: start;
             display: flex; flex-direction: column;
-            padding: 6rem 6% 4rem 6%; 
+            padding: 4rem 6% 3rem 6%; 
             position: relative; justify-content: center;
         }
 
-        /* ================= 动画核心逻辑重构 ================= */
+        /* 顺序弹入动画 */
         .animate { 
             opacity: 0; 
-            transform: translateY(60px); 
-            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            will-change: opacity, transform;
+            transform: translateY(80px); 
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
         }
-        /* 当进入视野时，JS 会自动挂载 .show 触发弹出 */
-        .animate.show { 
+        /* 当 Slide 获得 active 类时触发所有子元素动画 */
+        .slide.active .animate { 
             opacity: 1; 
-            transform: translateY(0); 
+            transform: translate(0, 0); 
         }
-        /* =================================================== */
+        /* 加大延迟间隔，让一张接一张的效果更明显 */
+        .delay-1 { transition-delay: 0.15s; } 
+        .delay-2 { transition-delay: 0.30s; }
+        .delay-3 { transition-delay: 0.45s; } 
+        .delay-4 { transition-delay: 0.60s; }
+        .delay-5 { transition-delay: 0.75s; }
 
         h1 { font-size: clamp(2.8rem, 8vw, 4.2rem); font-weight: 700; color: var(--md-primary); margin: 0 0 1rem 0; letter-spacing: -1px; line-height: 1.1; }
         h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; color: var(--md-on-background); font-weight: 500; line-height: 1.2; }
@@ -153,10 +158,8 @@
         @media (min-width: 768px) {
             .grid-layout { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; }
             .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-            .slide { padding: 4rem 10%; }
+            .slide { padding: 3rem 10%; }
         }
-
-        /* 卡片基础样式与 Hover 特效 */
         .card {
             background-color: var(--glass-surface-variant);
             padding: 1.6rem; border-radius: 22px;
@@ -165,15 +168,9 @@
             -webkit-backdrop-filter: blur(28px) saturate(140%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-            /* 注意：把 hover 动画单独拆分，避免和出场动画冲突 */
-            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
         }
-        .card:hover { 
-            transform: translateY(-6px) !important; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5); 
-            border-color: rgba(255, 255, 255, 0.2); 
-            transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); border-color: rgba(255, 255, 255, 0.2); }
         .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
         .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
         .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
@@ -181,7 +178,7 @@
         .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
 
         .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: transform 0.2s ease;}
+        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: all 0.2s ease;}
         .chip:hover { transform: scale(1.05); }
         .chip.primary { background-color: rgba(184, 209, 255, 0.8); color: var(--md-on-primary); }
         .chip.tertiary { background-color: rgba(166, 220, 232, 0.8); color: #00363D; }
@@ -196,7 +193,7 @@
         .progress-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 6px; color: var(--md-on-surface-variant); }
         .progress-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
         .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary)); border-radius: 4px; transition: width 1.2s cubic-bezier(0.15, 0.6, 0.1, 1); }
-        .slide .show .progress-fill { width: var(--progress); }
+        .slide.active .progress-fill { width: var(--progress); }
 
         #cover { align-items: flex-start; justify-content: center; padding-top: 2rem; }
         #ending { align-items: center; justify-content: center; text-align: center; }
@@ -227,9 +224,9 @@
 <div class="ppt-container" id="ppt-container">
     <section class="slide" id="cover">
         <h1 class="animate">TYOPXN360</h1>
-        <p class="slogan animate">在代码与硬件的世界里，做永远好奇的极客</p>
-        <p class="animate" style="font-size: clamp(1.2rem, 4vw, 1.6rem); color: var(--md-secondary); margin-top: 0; font-weight: 400;">网络工程专业学生 / 全栈极客探索者</p>
-        <div class="chip-container animate" style="margin-top: 2rem;">
+        <p class="slogan animate delay-1">在代码与硬件的世界里，做永远好奇的极客</p>
+        <p class="animate delay-2" style="font-size: clamp(1.2rem, 4vw, 1.6rem); color: var(--md-secondary); margin-top: 0; font-weight: 400;">网络工程专业学生 / 全栈极客探索者</p>
+        <div class="chip-container animate delay-3" style="margin-top: 2rem;">
             <span class="chip primary">广东东莞</span>
             <span class="chip">2006.12.14</span>
             <span class="chip">射手座</span>
@@ -241,7 +238,7 @@
     <section class="slide">
         <h2 class="animate">基础档案与形体管理</h2>
         <div class="grid-layout">
-            <div class="card animate">
+            <div class="card animate delay-1">
                 <div class="card-title">个人基础信息</div>
                 <ul>
                     <li><strong>家乡地：</strong>广东省中山市</li>
@@ -251,7 +248,7 @@
                     <li><strong>生活偏好：</strong>极度讨厌寒冷天气，偏爱温暖的南方环境</li>
                 </ul>
             </div>
-            <div class="card tertiary animate">
+            <div class="card tertiary animate delay-2">
                 <div class="card-title">形体与减脂自律计划</div>
                 <ul>
                     <li><strong>身高：</strong>164 cm</li>
@@ -275,7 +272,7 @@
     <section class="slide">
         <h2 class="animate">身份认同与社交边界</h2>
         <div class="grid-layout">
-            <div class="card accent animate">
+            <div class="card accent animate delay-1">
                 <div class="card-title">自我认同与情感</div>
                 <ul>
                     <li><strong>性取向：</strong>Gay</li>
@@ -284,7 +281,7 @@
                     <li><strong>情绪特质：</strong>共情能力强，敏感细腻，习惯向信任的人倾诉</li>
                 </ul>
             </div>
-            <div class="card animate">
+            <div class="card animate delay-2">
                 <div class="card-title">社交边界与关系</div>
                 <ul>
                     <li><strong>核心密友：</strong>zgh（大学校园第一学期挚友）</li>
@@ -299,7 +296,7 @@
     <section class="slide">
         <h2 class="animate">核心技术全栈</h2>
         <div class="grid-layout grid-3">
-            <div class="card primary animate">
+            <div class="card primary animate delay-1">
                 <div class="card-title">网络工程实战</div>
                 <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕家庭与校园全场景网络部署</p>
                 <div class="chip-container">
@@ -311,7 +308,7 @@
                     <span class="chip primary">开源代理协议排错</span>
                 </div>
             </div>
-            <div class="card animate">
+            <div class="card animate delay-2">
                 <div class="card-title">编程与开发</div>
                 <p style="margin: 0 0 10px 0; color: var(--md-on-surface-variant);">全栈开发学习，聚焦底层能力</p>
                 <div class="chip-container">
@@ -322,7 +319,7 @@
                     <span class="chip">油猴脚本开发</span>
                 </div>
             </div>
-            <div class="card tertiary animate">
+            <div class="card tertiary animate delay-3">
                 <div class="card-title">系统与运维</div>
                 <p style="margin: 0 0 10px 0; color: var(--md-on-tertiary-container);">全平台系统深度优化与排错</p>
                 <div class="chip-container">
@@ -338,7 +335,7 @@
     <section class="slide">
         <h2 class="animate">极客折腾宇宙</h2>
         <div class="grid-layout">
-            <div class="card animate">
+            <div class="card animate delay-1">
                 <div class="card-title">Android 玩机日常</div>
                 <ul>
                     <li><strong>当前主力机：</strong>Google Pixel 9 Pro XL</li>
@@ -349,7 +346,7 @@
                 </ul>
             </div>
 
-            <div class="card primary animate">
+            <div class="card primary animate delay-2">
                 <div class="card-title">类原生维护与实战 (Maintainer)</div>
                 <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕底层适配，长期为多款机型维护开源 ROM 与内核</p>
                 <div class="chip-container">
@@ -361,7 +358,7 @@
                 </div>
             </div>
 
-            <div class="card animate">
+            <div class="card animate delay-3">
                 <div class="card-title">Minecraft 开发者生态</div>
                 <ul>
                     <li><strong>服务端能力：</strong>MC服务端搭建、联机技术调试、IPv6远程联机配置</li>
@@ -370,7 +367,7 @@
                 </ul>
             </div>
 
-            <div class="card accent animate">
+            <div class="card accent animate delay-4">
                 <div class="card-title">PC 硬件与系统折腾</div>
                 <ul>
                     <li><strong>硬件配置：</strong>专注7000元内生产力配置搭建，优化代码编译性能</li>
@@ -379,7 +376,7 @@
                 </ul>
             </div>
 
-            <div class="card tertiary animate">
+            <div class="card tertiary animate delay-5">
                 <div class="card-title">数码好物收藏</div>
                 <ul>
                     <li><strong>充电设备：</strong>深度研究酷态科、睿量等品牌快充产品，关注PPS协议</li>
@@ -394,7 +391,7 @@
     <section class="slide">
         <h2 class="animate">生活与成长轨迹</h2>
         <div class="grid-layout">
-            <div class="card animate">
+            <div class="card animate delay-1">
                 <div class="card-title">日常与出行</div>
                 <ul>
                     <li><strong>茶饮偏好：</strong>钟爱蜜雪冰城、瑞幸咖啡等，出行必打卡当地茶饮店</li>
@@ -402,7 +399,7 @@
                     <li><strong>出行能力：</strong>精通高铁、地铁公共交通出行，熟练掌握全流程操作</li>
                 </ul>
             </div>
-            <div class="card accent animate">
+            <div class="card accent animate delay-2">
                 <div class="card-title">兴趣与精神世界</div>
                 <ul>
                     <li><strong>AI 助手偏好：</strong>首选 <strong>Gemini</strong>，次选 <strong>豆包</strong>，深度依赖AI辅助效率提升</li>
@@ -418,21 +415,21 @@
     <section class="slide">
         <h2 class="animate">梦想与进阶目标</h2>
         <div class="grid-layout grid-3">
-            <div class="card animate">
+            <div class="card animate delay-1">
                 <div class="card-title">底层语言与渲染技术</div>
                 <ul>
                     <li><strong>语言进阶：</strong>深入掌握 <strong>Rust</strong> 的内存安全机制与 <strong>Java</strong> 生态底蕴。</li>
                     <li><strong>图形编程：</strong>探索并实战 <strong>Vulkan</strong> 图形 API 的开发与底层渲染利用。</li>
                 </ul>
             </div>
-            <div class="card primary animate">
+            <div class="card primary animate delay-2">
                 <div class="card-title">Android 系统级开发</div>
                 <ul>
                     <li><strong>生态跨越：</strong>从 KernelSU/模块使用者，蜕变为底层规则的制定者。</li>
                     <li><strong>实战开发：</strong>深入研究注入机制，尝试独立编写 <strong>Overlay 模块</strong> 与 <strong>Xposed (LSPosed)</strong> 框架模块。</li>
                 </ul>
             </div>
-            <div class="card accent animate">
+            <div class="card accent animate delay-3">
                 <div class="card-title">Minecraft 创作者愿景</div>
                 <ul>
                     <li><strong>身份蜕变：</strong>从极致优化 TPS 的服主与整合包玩家，走向底层逻辑创作者。</li>
@@ -444,14 +441,14 @@
     
     <section class="slide" id="ending">
         <p class="motto animate">保持好奇，持续折腾</p>
-        <h1 class="animate">TYOPXN360</h1>
-        <p class="slogan animate">网络工程专业 | 全栈极客 | 永远在路上</p>
+        <h1 class="animate delay-1">TYOPXN360</h1>
+        <p class="slogan animate delay-2">网络工程专业 | 全栈极客 | 永远在路上</p>
         
-        <p class="animate" style="font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--md-tertiary); font-style: italic; font-weight: 500; margin-top: -1rem; margin-bottom: 2rem; letter-spacing: 1px;">
+        <p class="animate delay-3" style="font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--md-tertiary); font-style: italic; font-weight: 500; margin-top: -1rem; margin-bottom: 2rem; letter-spacing: 1px;">
             " 尝试去做一位开发者，而不只是一名用户 "
         </p>
 
-        <div class="chip-container animate" style="justify-content: center;">
+        <div class="chip-container animate delay-4" style="justify-content: center;">
             <span class="chip primary">广东东莞</span>
             <span class="chip">2006.12.14</span>
             <span class="chip">代码与硬件</span>
@@ -483,49 +480,28 @@
         }
     });
 
-    // ================= 全新重构的动画交错雷达引擎 =================
+    // ================= PPT式吸附与触发动画控制 =================
     document.addEventListener("DOMContentLoaded", () => {
-        const animateElements = document.querySelectorAll('.animate');
+        const slides = document.querySelectorAll('.slide');
         
-        // 观察器配置：当元素距离屏幕底部还有 40px 时触发，让弹出更有惊喜感
-        const observerOptions = { 
-            root: null, 
-            threshold: 0, 
-            rootMargin: "0px 0px -40px 0px" 
-        };
+        // threshold: 0.3 意味着当一页滑动露出 30% 时，就判定为进入视野
+        const observerOptions = { threshold: 0.3, rootMargin: "0px" };
         
-        let delayTimer = null;
-        let currentDelay = 0;
-
         const observer = new IntersectionObserver((entries) => {
-            // 将进入屏幕的元素和离开屏幕的元素区分处理
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // 当多个卡片在同一瞬间进入屏幕时，自动计算交错延迟时间 (相隔 0.15s)
-                    entry.target.style.transitionDelay = `${currentDelay}s`;
-                    entry.target.classList.add('show');
-                    
-                    currentDelay += 0.15;
-                    
-                    // 利用防抖重置计数器：0.1秒内没有新元素进入，就重置延迟
-                    clearTimeout(delayTimer);
-                    delayTimer = setTimeout(() => {
-                        currentDelay = 0;
-                    }, 100);
-
+                    // 进入视野，激活页面，触发阶梯动画
+                    entry.target.classList.add('active');
                 } else {
-                    // 离开屏幕时：立刻剥夺 show 类并清空延迟，为下一次滚动做准备
-                    entry.target.classList.remove('show');
-                    entry.target.style.transitionDelay = '0s';
+                    // 离开视野，移除激活状态。这样再次划回来时，动画会重新播放！
+                    entry.target.classList.remove('active');
                 }
             });
         }, observerOptions);
 
-        // 给每个标记了 animate 的卡片、标题装上雷达
-        animateElements.forEach(el => observer.observe(el));
+        slides.forEach(slide => observer.observe(slide));
     });
 
-    // 背景光球滚动视差
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         document.querySelector('.blob-1').style.transform = `translateY(${scrollY * 0.06}px)`;
