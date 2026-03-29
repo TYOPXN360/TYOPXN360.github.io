@@ -91,10 +91,7 @@
             -webkit-backdrop-filter: blur(20px);
         }
         @media (min-width: 768px) {
-            .fab-music {
-                top: 30px; right: 30px;
-                width: 68px; height: 68px; 
-            }
+            .fab-music { top: 30px; right: 30px; width: 68px; height: 68px; }
         }
         .fab-music:active { transform: scale(0.92); background-color: rgba(20, 40, 80, 1); }
         .breathing { animation: breathe 2s infinite ease-in-out; }
@@ -104,7 +101,7 @@
             100% { box-shadow: 0 6px 16px rgba(0,0,0,0.6); transform: scale(1); }
         }
 
-        /* 强制吸附滚动 */
+        /* ================= 核心：PPT强制吸附与布局 ================= */
         .ppt-container {
             position: relative;
             z-index: 10;
@@ -125,23 +122,29 @@
             position: relative; justify-content: center;
         }
 
-        /* 顺序弹入动画 */
+        /* ================= 终极杀手锏：完全重写的 keyframes 动画 ================= */
+        /* 所有带 animate 类的元素初始全部透明隐藏 */
         .animate { 
             opacity: 0; 
-            transform: translateY(80px); 
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
         }
-        /* 当 Slide 获得 active 类时触发所有子元素动画 */
+        /* 一旦页面滑到面前(.active)，立刻触发弹起动画 */
         .slide.active .animate { 
-            opacity: 1; 
-            transform: translate(0, 0); 
+            animation: popUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
         }
-        /* 加大延迟间隔，让一张接一张的效果更明显 */
-        .delay-1 { transition-delay: 0.15s; } 
-        .delay-2 { transition-delay: 0.30s; }
-        .delay-3 { transition-delay: 0.45s; } 
-        .delay-4 { transition-delay: 0.60s; }
-        .delay-5 { transition-delay: 0.75s; }
+        
+        /* 定义动画本身：从下面80px处慢慢升起并显现 */
+        @keyframes popUpFade {
+            0% { opacity: 0; transform: translateY(80px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 严格的阶梯式延迟（卡片专享） */
+        .slide.active .delay-1 { animation-delay: 0.15s; } 
+        .slide.active .delay-2 { animation-delay: 0.30s; }
+        .slide.active .delay-3 { animation-delay: 0.45s; } 
+        .slide.active .delay-4 { animation-delay: 0.60s; }
+        .slide.active .delay-5 { animation-delay: 0.75s; }
+        /* ==================================================================== */
 
         h1 { font-size: clamp(2.8rem, 8vw, 4.2rem); font-weight: 700; color: var(--md-primary); margin: 0 0 1rem 0; letter-spacing: -1px; line-height: 1.1; }
         h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; color: var(--md-on-background); font-weight: 500; line-height: 1.2; }
@@ -160,6 +163,8 @@
             .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
             .slide { padding: 3rem 10%; }
         }
+        
+        /* 修复后的卡片样式：剥离了会产生冲突的 transition: all */
         .card {
             background-color: var(--glass-surface-variant);
             padding: 1.6rem; border-radius: 22px;
@@ -168,9 +173,15 @@
             -webkit-backdrop-filter: blur(28px) saturate(140%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+            /* 只对特定属性做悬浮过渡，绝不干扰弹出动画 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); border-color: rgba(255, 255, 255, 0.2); }
+        .card:hover { 
+            /* !important 强制突破动画的锁定状态，保证鼠标悬浮立有反馈 */
+            transform: translateY(-6px) !important; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5); 
+            border-color: rgba(255, 255, 255, 0.2); 
+        }
         .card.primary { background-color: var(--glass-primary-container); color: var(--md-on-primary-container); }
         .card.tertiary { background-color: var(--glass-tertiary-container); color: var(--md-on-tertiary-container); }
         .card.accent { background-color: var(--glass-accent-container); color: var(--md-on-accent-container); }
@@ -178,7 +189,7 @@
         .card.primary .card-title, .card.tertiary .card-title, .card.accent .card-title { color: inherit; }
 
         .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: all 0.2s ease;}
+        .chip { background-color: rgba(66, 74, 93, 0.6); color: var(--md-on-secondary-container); padding: 6px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.04); transition: transform 0.2s ease;}
         .chip:hover { transform: scale(1.05); }
         .chip.primary { background-color: rgba(184, 209, 255, 0.8); color: var(--md-on-primary); }
         .chip.tertiary { background-color: rgba(166, 220, 232, 0.8); color: #00363D; }
@@ -480,20 +491,19 @@
         }
     });
 
-    // ================= PPT式吸附与触发动画控制 =================
+    // ================= 滚动吸附触发引擎 =================
     document.addEventListener("DOMContentLoaded", () => {
         const slides = document.querySelectorAll('.slide');
         
-        // threshold: 0.3 意味着当一页滑动露出 30% 时，就判定为进入视野
+        // threshold 0.3 意味着只要有一页露出30%，它就会被激活，开始播放内部动画
         const observerOptions = { threshold: 0.3, rootMargin: "0px" };
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // 进入视野，激活页面，触发阶梯动画
                     entry.target.classList.add('active');
                 } else {
-                    // 离开视野，移除激活状态。这样再次划回来时，动画会重新播放！
+                    // 一旦滑走，移除状态，为下次回看时的动画重置做好准备
                     entry.target.classList.remove('active');
                 }
             });
@@ -502,6 +512,7 @@
         slides.forEach(slide => observer.observe(slide));
     });
 
+    // 背景光球滚动视差
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         document.querySelector('.blob-1').style.transform = `translateY(${scrollY * 0.06}px)`;
