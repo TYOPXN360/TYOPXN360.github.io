@@ -47,7 +47,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-        。blur-background {
+        .blur-background {
             position: fixed;
             top: 0; left: 0; 
             width: 100vw; height: 100vh;
@@ -55,7 +55,7 @@
             overflow: hidden;
             pointer-events: none;
         }
-        。blur-blob {
+        .blur-blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(130px);
@@ -321,7 +321,7 @@
         </div>
     </section>
 
-   <section class="slide">
+    <section class="slide">
         <h2 class="animate">极客折腾宇宙</h2>
         <div class="grid-layout">
             <div class="card animate delay-1">
@@ -401,6 +401,7 @@
             <span class="chip">代码与硬件</span>
         </div>
     </section>
+</div>
 
 <script>
     const bgm = document.getElementById('bgm');
@@ -416,7 +417,7 @@
                 musicToggle.classList.add('breathing');
             }).catch(err => {
                 console.log('音频加载或播放失败', err);
-                alert("播放失败！可能是当前网络拦截了网易云的音乐外链.如果一直没声音，建议将本地的 mp3 文件重命名为 bgm.mp3 放在同目录下替换使用.");
+                alert("播放失败！可能是当前网络拦截了网易云的音乐外链。如果一直没声音，建议将本地的 mp3 文件重命名为 bgm.mp3 放在同目录下替换使用。");
             });
         } else {
             bgm.pause();
