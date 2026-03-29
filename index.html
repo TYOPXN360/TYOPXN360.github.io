@@ -182,7 +182,11 @@
         .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--md-primary), var(--md-tertiary)); border-radius: 4px; transition: width 1.2s cubic-bezier(0.15, 0.6, 0.1, 1); }
         .slide.active .progress-fill { width: var(--progress); }
 
-        /* 最终页响应式修正 */
+        #cover { align-items: flex-start; justify-content: center; padding-top: 2rem; }
+        #ending { align-items: center; justify-content: center; text-align: center; }
+        .motto { font-size: clamp(1.5rem, 5vw, 2rem); color: var(--md-primary); font-weight: 500; margin-bottom: 2rem; line-height: 1.4; }
+
+        /* 最后一页双栏布局 */
         .split-ending {
             display: flex;
             flex-direction: column;
@@ -191,32 +195,6 @@
             max-width: 1400px;
             align-items: center;
         }
-
-        /* 鸣谢名单布局组件 */
-        .credit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .name-tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            flex-shrink: 0; /* 禁止缩小，保证标签形状 */
-        }
-
-        /* 适配不同卡片的背景框颜色 */
-        .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
-        .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
-        .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
-        .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
-
         @media (min-width: 1024px) {
             .split-ending {
                 flex-direction: row;
@@ -224,8 +202,13 @@
                 align-items: flex-start;
                 justify-content: space-between;
             }
-            .ending-left { flex: 1; padding-top: 4rem; }
-            .ending-right { flex: 1.3; }
+            .ending-left {
+                flex: 1;
+                padding-top: 4rem;
+            }
+            .ending-right {
+                flex: 1.2;
+            }
             .credits-grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -270,15 +253,216 @@
         </div>
     </section>
 
+    <section class="slide">
+        <h2 class="animate">基础档案与形体管理</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">个人基础信息</div>
+                <ul>
+                    <li><strong>家乡地：</strong>广东省中山市</li>
+                    <li><strong>身份：</strong>广东科技学院在校大学生，网络工程专业</li>
+                    <li><strong>生日：</strong>2006年12月14日，射手座，AB型血</li>
+                    <li><strong>性格：</strong>ISFP敏感型，细腻共情，对热爱的事物充满探索欲</li>
+                    <li><strong>生活偏好：</strong>极度讨厌寒冷天气，偏爱温暖的南方环境</li>
+                </ul>
+            </div>
+            <div class="card tertiary animate delay-2">
+                <div class="card-title">形体与减脂自律计划</div>
+                <ul>
+                    <li><strong>身高：</strong>164 cm</li>
+                    <li><strong>当前体重：</strong>65 kg | <strong>目标体重：</strong>49 kg</li>
+                    <li><strong>核心方案：</strong>骑行+跑步有氧运动，配合饮食控制</li>
+                    <li><strong>辅助方式：</strong>膳食纤维片、羽衣甘蓝粉等代餐辅助</li>
+                </ul>
+                <div class="progress-wrap">
+                    <div class="progress-label">
+                        <span>减重进度</span>
+                        <span>约23%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress: 23%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">身份认同与社交边界</h2>
+        <div class="grid-layout">
+            <div class="card accent animate delay-1">
+                <div class="card-title">自我认同与情感</div>
+                <ul>
+                    <li><strong>性取向：</strong>Gay</li>
+                    <li><strong>情感经历：</strong>初中时期恋爱，前任yrh</li>
+                    <li><strong>核心需求：</strong>极度渴望真实的线下陪伴与深度情感联结</li>
+                    <li><strong>情绪特质：</strong>共情能力强，敏感细腻，习惯向信任的人倾诉</li>
+                </ul>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-title">社交边界与关系</div>
+                <ul>
+                    <li><strong>社交原则：</strong>强边界感，主动回避低质量无效社交</li>
+                    <li><strong>社交状态：</strong>对陌生环境有轻微社交焦虑，偏爱小范围深度社交</li>
+                    <li><strong>相处模式：</strong>真诚坦率，重视彼此的尊重与情绪价值</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">核心技术全栈</h2>
+        <div class="grid-layout grid-3">
+            <div class="card primary animate delay-1">
+                <div class="card-title">网络工程实战</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕家庭与校园全场景网络部署</p>
+                <div class="chip-container">
+                    <span class="chip primary">IPv6全链路配置</span>
+                    <span class="chip primary">Mesh组网架构</span>
+                    <span class="chip primary">双WAN多拨技术</span>
+                    <span class="chip primary">光猫AP模式调试</span>
+                    <span class="chip primary">VLAN/MACVLAN</span>
+                    <span class="chip primary">开源代理协议排错</span>
+                </div>
+            </div>
+            <div class="card animate delay-2">
+                <div class="card-title">编程与开发</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-surface-variant);">全栈开发学习，聚焦底层能力</p>
+                <div class="chip-container">
+                    <span class="chip">Rust 语言</span>
+                    <span class="chip">C 语言底层</span>
+                    <span class="chip">Flutter 应用开发</span>
+                    <span class="chip">Git 版本控制</span>
+                    <span class="chip">油猴脚本开发</span>
+                </div>
+            </div>
+            <div class="card tertiary animate delay-3">
+                <div class="card-title">系统与运维</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-tertiary-container);">全平台系统深度优化与排错</p>
+                <div class="chip-container">
+                    <span class="chip tertiary">Windows 深度运维</span>
+                    <span class="chip tertiary">Linux 系统管理</span>
+                    <span class="chip tertiary">双系统引导修复</span>
+                    <span class="chip tertiary">系统故障排查</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">极客折腾宇宙</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">Android 玩机日常</div>
+                <ul>
+                    <li><strong>当前主力机：</strong>Google Pixel 9 Pro XL</li>
+                    <li><strong>购机原则：</strong>必须支持 BL 解锁（重点关注一加、真我等品牌）</li>
+                    <li><strong>系统与审美：</strong>极度推崇纯净的类原生生态，是 <strong>Material Design 3 Expressive</strong> 设计语言的坚定拥趸</li>
+                    <li><strong>权限生态：</strong>深度依赖 <strong>KernelSU</strong>，目前主力挂载 <strong>ResukiSU</strong></li>
+                    <li><strong>开源协作：</strong>活跃于前沿社区，热衷提交高质量 Issue 并积极协助排查修复 Bug</li>
+                </ul>
+            </div>
+            <div class="card primary animate delay-2">
+                <div class="card-title">类原生维护与实战 (Maintainer)</div>
+                <p style="margin: 0 0 10px 0; color: var(--md-on-primary-container);">深耕底层适配，长期为多款机型维护开源 ROM 与内核</p>
+                <div class="chip-container">
+                    <span class="chip primary" style="background: rgba(242, 184, 208, 0.25); color: #FFD9E5;">Google Pixel 9 Pro XL (Sultan KSU内核维护编译)</span>
+                    <span class="chip primary" style="background: rgba(255, 255, 255, 0.15);">Redmi Note 10 Pro (chopin)</span>
+                    <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi Note 9 Pro (gauguin)</span>
+                    <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi K30S Ultra (apollo)</span>
+                    <span class="chip primary" style="background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.6);">[已停更] Redmi K30 Pro (lmi)</span>
+                </div>
+            </div>
+            <div class="card animate delay-3">
+                <div class="card-title">Minecraft 开发者生态</div>
+                <ul>
+                    <li><strong>服务端能力：</strong>MC服务端搭建、联机技术调试、IPv6远程联机配置</li>
+                    <li><strong>问题排查：</strong>Mod冲突排查、Java崩溃日志深度分析</li>
+                    <li><strong>性能优化：</strong>JVM参数调优、服务器TPS提升、内存泄漏解决</li>
+                </ul>
+            </div>
+            <div class="card accent animate delay-4">
+                <div class="card-title">PC 硬件与系统折腾</div>
+                <ul>
+                    <li><strong>硬件配置：</strong>专注7000元内生产力配置搭建，优化代码编译性能</li>
+                    <li><strong>故障排查：</strong>精通Windows系统启动故障、更新错误、兼容性问题修复</li>
+                    <li><strong>系统优化：</strong>兼顾生产力与游戏场景的性能调优</li>
+                </ul>
+            </div>
+            <div class="card tertiary animate delay-5">
+                <div class="card-title">数码好物收藏</div>
+                <ul>
+                    <li><strong>充电设备：</strong>深度研究酷态科、睿量等品牌快充产品，关注PPS协议</li>
+                    <li><strong>移动电源：</strong>专注大容量合规充电宝，符合高铁/地铁携带标准</li>
+                    <li><strong>手机需求：</strong>极致追求大电池续航，关注磁吸充电兼容性</li>
+                    <li><strong>智能穿戴：</strong>偏好方表智能手环，核心需求独立GPS、运动记录</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">生活与成长轨迹</h2>
+        <div class="grid-layout">
+            <div class="card animate delay-1">
+                <div class="card-title">日常与出行</div>
+                <ul>
+                    <li><strong>茶饮偏好：</strong>钟爱蜜雪冰城、瑞幸咖啡等，出行必打卡当地茶饮店</li>
+                    <li><strong>出行足迹：</strong>热衷广东省内短途出行，足迹覆盖东莞、深圳、中山等城市</li>
+                    <li><strong>出行能力：</strong>精通高铁、地铁公共交通出行，熟练掌握全流程操作</li>
+                </ul>
+            </div>
+            <div class="card accent animate delay-2">
+                <div class="card-title">兴趣与精神世界</div>
+                <ul>
+                    <li><strong>AI 助手偏好：</strong>首选 <strong>Gemini</strong>，次选 <strong>豆包</strong>，深度依赖AI辅助效率提升</li>
+                    <li><strong>AI 创作：</strong>热衷AI绘画、AI视频生成，擅长多轮迭代优化创意内容</li>
+                    <li><strong>内容偏好：</strong>喜欢悬疑反转短篇故事，热爱角色扮演、猜谜互动游戏</li>
+                    <li><strong>学习习惯：</strong>对网络工程、编程有强烈求知欲，习惯实战深化学习</li>
+                    <li><strong>线上常驻：</strong>经常活跃于 <strong>酷安</strong> 和 <strong>Telegram</strong>，进行日常冲浪与技术交流</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="animate">梦想与进阶目标</h2>
+        <div class="grid-layout grid-3">
+            <div class="card animate delay-1">
+                <div class="card-title">底层语言与渲染技术</div>
+                <ul>
+                    <li><strong>语言进阶：</strong>深入掌握 <strong>Rust</strong> 的内存安全机制与 <strong>Java</strong> 生态底蕴。</li>
+                    <li><strong>图形编程：</strong>探索并实战 <strong>Vulkan</strong> 图形 API 的开发与底层渲染利用。</li>
+                </ul>
+            </div>
+            <div class="card primary animate delay-2">
+                <div class="card-title">Android 系统级开发</div>
+                <ul>
+                    <li><strong>生态跨越：</strong>从 KernelSU/模块使用者，蜕变为底层规则的制定者。</li>
+                    <li><strong>实战开发：</strong>深入研究注入机制，尝试独立编写 <strong>Overlay 模块</strong> 与 <strong>Xposed (LSPosed)</strong> 框架模块。</li>
+                </ul>
+            </div>
+            <div class="card accent animate delay-3">
+                <div class="card-title">Minecraft 创作者愿景</div>
+                <ul>
+                    <li><strong>身份蜕变：</strong>从极致优化 TPS 的服主与整合包玩家，走向底层逻辑创作者。</li>
+                    <li><strong>终极目标：</strong>从零起步，运用 Java 独立开发并维护一款真正属于自己的 <strong>Minecraft Mod</strong>。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
     <section class="slide" id="ending">
         <div class="split-ending">
             <div class="ending-left">
                 <p class="motto animate">保持好奇，持续折腾</p>
                 <h1 class="animate delay-1">TYOPXN360</h1>
                 <p class="slogan animate delay-2">网络工程专业 | 全栈极客 | 永远在路上</p>
-                <p class="animate delay-3" style="font-size: clamp(1rem, 3vw, 1.3rem); color: var(--md-tertiary); font-style: italic; font-weight: 500; margin: 1.5rem 0; letter-spacing: 1px;">
+                
+                <p class="animate delay-3" style="font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--md-tertiary); font-style: italic; font-weight: 500; margin: 1.5rem 0; letter-spacing: 1px;">
                     " 尝试去做一位开发者，而不只是一名用户 "
                 </p>
+
                 <div class="chip-container animate delay-4">
                     <span class="chip primary">广东东莞</span>
                     <span class="chip">2006.12.14</span>
@@ -289,58 +473,58 @@
             <div class="ending-right">
                 <h2 class="animate" style="font-size: 1.5rem; margin-bottom: 1.5rem;">鸣谢名单 (Credits)</h2>
                 
-                <div class="credits-grid">
-                    <div class="card animate delay-1" style="height: 100%;">
+                <style>
+                    .name-tag {
+                        display: inline-block;
+                        padding: 2px 8px;
+                        border-radius: 6px;
+                        font-weight: 600;
+                        margin-right: 4px;
+                        font-size: 0.9rem;
+                        white-space: nowrap;
+                    }
+                    /* 适配不同卡片的背景框颜色 */
+                    .card .name-tag { background: rgba(255, 255, 255, 0.15); color: #FFF; }
+                    .card.tertiary .name-tag { background: rgba(166, 220, 232, 0.25); color: var(--md-on-tertiary-container); }
+                    .card.primary .name-tag { background: rgba(184, 209, 255, 0.25); color: var(--md-on-primary-container); }
+                    .card.accent .name-tag { background: rgba(242, 184, 208, 0.25); color: var(--md-on-accent-container); }
+                </style>
+
+                <div class="credits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; align-items: stretch;">
+                    
+                    <div class="card animate delay-1" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">启蒙 · 小学</div>
-                        <div class="credit-item">
-                            <span class="name-tag">ORC & YTT</span>
-                            <span>Minecraft路上的古神级启蒙伙伴</span>
+                        <div style="font-size: 0.9rem; line-height: 1.7;">
+                            <p><span class="name-tag">ORC & YTT</span> Minecraft路上的古神级启蒙伙伴</p>
                         </div>
                     </div>
                     
-                    <div class="card tertiary animate delay-2" style="height: 100%;">
+                    <div class="card tertiary animate delay-2" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">折腾 · 初中</div>
-                        <div class="credit-item">
-                            <span class="name-tag">YRH</span>
-                            <span>陪伴最久的朋友，玩机路上不离不弃，至今仍在联系</span>
-                        </div>
-                        <div class="credit-item">
-                            <span class="name-tag">WXH</span>
-                            <span>Minecraft的PVP技术大牛，Vape主理人,幽默话题主持人</span>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 8px;"><span class="name-tag">YRH</span> 陪伴最久的朋友，玩机路上不离不弃，至今仍在联系</p>
+                            <p><span class="name-tag">WXH</span> Minecraft的PVP技术大牛，Vape主理人,幽默话题主持人</p>
                         </div>
                     </div>
                     
-                    <div class="card primary animate delay-3" style="height: 100%;">
+                    <div class="card primary animate delay-3" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">并肩 · 高中</div>
-                        <div class="credit-item">
-                            <span class="name-tag">WTY</span>
-                            <span>实力远超我的跑友 / PhigrOS音游专业玩家Pro</span>
-                        </div>
-                        <div class="credit-item">
-                            <span class="name-tag">WJY</span>
-                            <span>Minecraft启蒙玩家，沉稳陪跑的Runner</span>
-                        </div>
-                        <div class="credit-item">
-                            <span class="name-tag">TYH</span>
-                            <span>体育巨佬，无人能及；玩机路上的小伙伴</span>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 6px;"><span class="name-tag">WTY</span> 实力远超我的跑友 / PhigrOS音游专业玩家Pro</p>
+                            <p style="margin-bottom: 6px;"><span class="name-tag">WJY</span> Minecraft启蒙玩家，沉稳陪跑的Runner</p>
+                            <p><span class="name-tag">TYH</span> 体育巨佬，无人能及；玩机路上的小伙伴</p>
                         </div>
                     </div>
                     
-                    <div class="card accent animate delay-4" style="height: 100%;">
+                    <div class="card accent animate delay-4" style="display: flex; flex-direction: column; height: 100%;">
                         <div class="card-title" style="font-size: 0.9rem; opacity: 0.8; border-bottom: none; margin-bottom: 8px;">探索 · 大学</div>
-                        <div class="credit-item">
-                            <span class="name-tag">SZX</span>
-                            <span>网金时期跑步伙伴，马拉松领跑者</span>
-                        </div>
-                        <div class="credit-item">
-                            <span class="name-tag">HFK</span>
-                            <span>网金时期Minecraft腐竹大牛，资源丰富</span>
-                        </div>
-                        <div class="credit-item">
-                            <span class="name-tag">ZGH</span>
-                            <span>东莞探索者,电动车大神,陪我走遍国贸每个角落</span>
+                        <div style="font-size: 0.85rem; line-height: 1.8;">
+                            <p style="margin-bottom: 6px;"><span class="name-tag">SZX</span> 网金时期跑步伙伴，马拉松领跑者</p>
+                            <p style="margin-bottom: 6px;"><span class="name-tag">HFK</span> 网金时期Minecraft腐竹大牛，资源丰富</p>
+                            <p><span class="name-tag">ZGH</span> 网金时期东莞探索者,电动车大神,陪我走遍国贸每个角落</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -361,7 +545,7 @@
                 musicToggle.classList.add('breathing');
             }).catch(err => {
                 console.log('音频加载或播放失败', err);
-                alert("播放失败！建议检查音频链接或使用本地 bgm.mp3 替换。");
+                alert("播放失败！可能是当前网络拦截了网易云的音乐外链。如果一直没声音，建议将本地的 mp3 文件重命名为 bgm.mp3 放在同目录下替换使用。");
             });
         } else {
             bgm.pause();
